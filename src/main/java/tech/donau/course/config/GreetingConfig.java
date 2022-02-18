@@ -2,6 +2,7 @@ package tech.donau.course.config;
 
 import io.quarkus.arc.config.ConfigProperties;
 
+import javax.validation.constraints.Size;
 import java.util.Optional;
 
 @ConfigProperties(prefix = "greeting")
@@ -10,11 +11,12 @@ public class GreetingConfig {
     private String name;
     private String suffix = "!";
     private Optional<String> prefix;
-
+    private CountryConfig country;
     public String getName() {
         return name;
     }
 
+    @Size(max = 10)
     public void setName(String name) {
         this.name = name;
     }
@@ -33,6 +35,38 @@ public class GreetingConfig {
 
     public void setPrefix(Optional<String> prefix) {
         this.prefix = prefix;
+    }
+
+    public CountryConfig getCountry() {
+        return country;
+    }
+
+    public void setCountry(CountryConfig country) {
+        this.country = country;
+    }
+
+    // config for properties with multiple parts eg greeting.country.name
+    public static class CountryConfig {
+
+        private String name;
+        private Integer id;
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public Integer getId() {
+            return id;
+        }
+
+        public void setId(Integer id) {
+            this.id = id;
+        }
+
     }
 
 }
