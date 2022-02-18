@@ -16,19 +16,19 @@ public class GreetingService {
     @Inject
     GreetingConfig greetingConfig;
 
-    @ConfigProperty(name = "greeting.name")
-    String greeting;
-
-    @ConfigProperty(name = "greeting.suffix", defaultValue = "!")
-    String greetingSuffix;
-
-    @ConfigProperty(name = "greeting.prefix")
-    Optional<String> greetingPrefix;
+//    @ConfigProperty(name = "greeting.name")
+//    String greeting;
+//
+//    @ConfigProperty(name = "greeting.suffix", defaultValue = "!")
+//    String greetingSuffix;
+//
+//    @ConfigProperty(name = "greeting.prefix")
+//    Optional<String> greetingPrefix;
 
 
     public String sayHello() {
-        String alternateConfigAccesssGreeting = ConfigProvider.getConfig().getValue("greeting.name", String.class);
-        return greetingPrefix.orElse("_") + greetingConfig.getName() + greetingSuffix;
+//        String alternateConfigAccesssGreeting = ConfigProvider.getConfig().getValue("greeting.name", String.class);
+        return greetingConfig.getPrefix().orElse("_") + greetingConfig.getName() + greetingConfig.getSuffix();
     }
 
     public String sayHello(final String name) {
