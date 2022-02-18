@@ -2,14 +2,19 @@ package tech.donau.course.service;
 
 import org.eclipse.microprofile.config.ConfigProvider;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
+import tech.donau.course.config.GreetingConfig;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import java.util.Optional;
 import java.util.UUID;
 
 @ApplicationScoped
 public class GreetingService {
 
+
+    @Inject
+    GreetingConfig greetingConfig;
 
     @ConfigProperty(name = "greeting.name")
     String greeting;
@@ -22,8 +27,8 @@ public class GreetingService {
 
 
     public String sayHello() {
-        String alternateConfigAccesssGreeting = ConfigProvider.getConfig().getValue("greeting.name", String.class)
-        return greetingPrefix.orElse("_") + greeting + greetingSuffix;
+        String alternateConfigAccesssGreeting = ConfigProvider.getConfig().getValue("greeting.name", String.class);
+        return greetingPrefix.orElse("_") + greetingConfig.getName() + greetingSuffix;
     }
 
     public String sayHello(final String name) {
