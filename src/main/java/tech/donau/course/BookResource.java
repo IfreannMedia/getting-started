@@ -1,41 +1,40 @@
 package tech.donau.course;
 
-import io.netty.util.internal.StringUtil;
-import org.jboss.resteasy.annotations.Body;
+import tech.donau.course.data.Book;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 
 @Path("/book")
 public class BookResource {
 
 
-    private static ArrayList<String> books = new ArrayList<>();
+    private static ArrayList<Book> books = new ArrayList<>();
 
 
     static {
-        books.add("Moby Dick");
+        books.add(new Book("Moby Dick", "Herman Melville"));
     }
 
     @GET
-    @Produces(MediaType.TEXT_PLAIN)
-    public String getBooks() {
-        return StringUtil.join(", ", books).toString();
+    @Produces(MediaType.APPLICATION_JSON)
+    public Collection<Book> getBooks() {
+        return books;
     }
 
     @POST
-    @Consumes(MediaType.TEXT_PLAIN)
-    public String postBook(final String book) {
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Book postBook(final Book book) {
         books.add(book);
         return book;
     }
 
     @PUT
     @Path("/{id}")
-    @Produces(MediaType.TEXT_PLAIN)
-    public List<String> putBook(@PathParam("id") final Integer id, final String book) {
+    @Produces(MediaType.APPLICATION_JSON)
+    public Collection<Book> putBook(@PathParam("id") final Integer id, final Book book) {
         books.remove(id.intValue());
         books.add(id, book);
         return books;
@@ -43,8 +42,8 @@ public class BookResource {
 
     @DELETE
     @Path("/{id}")
-    @Produces(MediaType.TEXT_PLAIN)
-    public List<String> deleteBook(@PathParam("id") final Integer id) {
+    @Produces(MediaType.APPLICATION_JSON)
+    public Collection<Book> deleteBook(@PathParam("id") final Integer id) {
         books.remove(id.intValue());
         return books;
     }
