@@ -1,5 +1,6 @@
 package tech.donau.course;
 
+import io.quarkus.runtime.ShutdownEvent;
 import io.quarkus.runtime.StartupEvent;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -13,5 +14,9 @@ public class AppLifecycleListener {
 
     public void onStart(@Observes StartupEvent startup) {
         logger.info("WE STARTED");
+    }
+
+    public void onShutDown(@Observes ShutdownEvent shutdown) {
+        logger.info("WE SHUT DOWN");
     }
 }

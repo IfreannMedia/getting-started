@@ -11,11 +11,12 @@ import java.util.UUID;
 @ApplicationScoped
 public class GreetingService {
 
-    @ConfigProperty(name = "greeting.base64name")
-    Base64Value name;
 
     @Inject
     GreetingConfig greetingConfig;
+
+//    @ConfigProperty(name = "greeting.base64name")
+//    Base64Value name;
 
 //    @ConfigProperty(name = "greeting.name")
 //    String greeting;
@@ -30,7 +31,7 @@ public class GreetingService {
     public String sayHello() {
 //        String alternateConfigAccesssGreeting = ConfigProvider.getConfig().getValue("greeting.name", String.class);
         return greetingConfig.getPrefix().orElse("_")
-                + name
+                + greetingConfig.getName()
                 + greetingConfig.getSuffix()
                 + " your country name: " + greetingConfig.getCountry().getName()
                 + " your country id: " + greetingConfig.getCountry().getId();
