@@ -1,6 +1,8 @@
 package tech.donau.course;
 
-import javax.print.attribute.standard.Media;
+import tech.donau.course.service.GreetingService;
+
+import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
@@ -9,10 +11,13 @@ public class GreetingResource {
 
     private static final String TOKEN = "dev";
 
+    @Inject
+    private GreetingService greetingService;
+
     @GET
     @Produces(MediaType.TEXT_PLAIN)
-    public String hello() {
-        return "hello test";
+    public String hello(@QueryParam("name") final String name) {
+        return greetingService.sayHello(name);
     }
 
     @GET
@@ -28,7 +33,7 @@ public class GreetingResource {
     @Consumes(MediaType.APPLICATION_JSON)
     public String postHello(@HeaderParam("token") final String token, @QueryParam("token") final String param, final String body) {
         String theToken = token != null ? token : param;
-        if(theToken == null){
+        if (theToken == null) {
             throw new RuntimeException("no token!");
         }
         System.out.println(param);

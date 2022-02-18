@@ -1,7 +1,9 @@
 package tech.donau.course.service;
 
+import javax.enterprise.context.ApplicationScoped;
 import java.util.UUID;
 
+@ApplicationScoped
 public class GreetingService {
 
 
