@@ -1,7 +1,6 @@
 package tech.donau.course.service;
 
-import org.eclipse.microprofile.config.inject.ConfigProperty;
-import tech.donau.course.config.Base64Value;
+import org.jboss.logging.Logger;
 import tech.donau.course.config.GreetingConfig;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -11,6 +10,7 @@ import java.util.UUID;
 @ApplicationScoped
 public class GreetingService {
 
+    private static Logger LOGGER = Logger.getLogger(GreetingService.class.getName());
 
     @Inject
     GreetingConfig greetingConfig;
@@ -29,7 +29,9 @@ public class GreetingService {
 
 
     public String sayHello() {
-//        String alternateConfigAccesssGreeting = ConfigProvider.getConfig().getValue("greeting.name", String.class);
+        LOGGER.debug("debugger boo!" + LOGGER.isDebugEnabled());
+//        String alternateConfigAccesssG
+//        reeting = ConfigProvider.getConfig().getValue("greeting.name", String.class);
         return greetingConfig.getPrefix().orElse("_")
                 + greetingConfig.getName()
                 + greetingConfig.getSuffix()
