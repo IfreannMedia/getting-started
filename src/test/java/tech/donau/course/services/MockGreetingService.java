@@ -9,6 +9,11 @@ import javax.enterprise.context.ApplicationScoped;
 @ApplicationScoped
 public class MockGreetingService extends GreetingService {
 
+//    @Override
+//    public String sayHello() {
+//        return "Get Mocked";
+//    }
+
     @Override
     public String sayHello(String name) {
         return String.format("Hello %s, your id is: " +
