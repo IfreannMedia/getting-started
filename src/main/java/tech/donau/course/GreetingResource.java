@@ -16,7 +16,14 @@ public class GreetingResource {
 
     @GET
     @Produces(MediaType.TEXT_PLAIN)
-    public String hello(@QueryParam("name") final String name) {
+    public String hello() {
+        return greetingService.sayHello();
+    }
+
+    @GET
+    @Path("/{name}")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String hello(@PathParam("name") final String name) {
         return greetingService.sayHello(name);
     }
 
