@@ -2,6 +2,7 @@ package tech.donau.course.data;
 
 public class Book {
 
+//    private Long id;
     private String name;
     private String author;
 
@@ -12,6 +13,14 @@ public class Book {
         this.name = name;
         this.author = author;
     }
+
+//    public Long getId() {
+//        return id;
+//    }
+//
+//    public void setId(Long id) {
+//        this.id = id;
+//    }
 
     public String getName() {
         return name;
