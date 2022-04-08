@@ -2,7 +2,6 @@ package tech.donau.course.config;
 
 import io.quarkus.arc.config.ConfigProperties;
 
-import javax.validation.constraints.Size;
 import java.util.Optional;
 
 @ConfigProperties(prefix = "greeting")
@@ -16,7 +15,6 @@ public class GreetingConfig {
         return name;
     }
 
-    @Size(max = 10)
     public void setName(String name) {
         this.name = name;
     }
